@@ -2,98 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gold Bank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Bank - Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">
-        <div class="logo">
-            <h2>🏦 Gold Bank</h2>
-        </div>
-        <div class="welcome-text">
-            <p>Welcome back! Please login to your account.</p>
-        </div>
-        <form onsubmit="return validateForm(event)">
+        <h1>Gold Bank</h1>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <div class="password-strength" id="passwordStrength"></div>
-            <div class="form-footer">
-                <label class="remember-me">
-                    <input type="checkbox" id="remember"> Remember me
-                </label>
-                <a href="#" class="forgot-password">Forgot Password?</a>
-            </div>
-            <div id="loading">Validating...</div>
             <button type="submit">Login</button>
         </form>
     </div>
-
-    <script>
-        let loginAttempts = 0;
-        
-        function validatePassword(password) {
-            return password.length >= 8 &&
-                   /[A-Z]/.test(password) &&
-                   /[0-9]/.test(password);
-        }
-
-        function updatePasswordStrength() {
-            const password = document.getElementById('password').value;
-            const strengthDiv = document.getElementById('passwordStrength');
-            
-            if (password.length === 0) {
-                strengthDiv.textContent = '';
-            } else if (validatePassword(password)) {
-                strengthDiv.textContent = 'Strong password';
-                strengthDiv.style.color = 'green';
-            } else {
-                strengthDiv.textContent = 'Password must be 8+ characters with numbers and uppercase letters';
-                strengthDiv.style.color = 'red';
-            }
-        }
-
-        document.getElementById('password').addEventListener('input', updatePasswordStrength);
-
-        function validateForm(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const loading = document.getElementById('loading');
-            
-            loading.style.display = 'block';
-
-            setTimeout(() => {
-                if (loginAttempts >= 3) {
-                    alert('Too many login attempts. Please try again later.');
-                    loading.style.display = 'none';
-                    return false;
-                }
-
-                if (username === 'ads12345678' && password === 'Abs1234567890') {
-                    sessionStorage.setItem('isLoggedIn', 'true');
-                    if (document.getElementById('remember').checked) {
-                        localStorage.setItem('rememberedUser', username);
-                    }
-                    window.location.href = 'assets.html';
-                } else {
-                    loginAttempts++;
-                    alert('Invalid credentials!');
-                    loading.style.display = 'none';
-                }
-            }, 1000);
-
-            return false;
-        }
-
-        // Check for remembered user on page load
-        window.onload = function() {
-            const rememberedUser = localStorage.getItem('rememberedUser');
-            if (rememberedUser) {
-                document.getElementById('username').value = rememberedUser;
-                document.getElementById('remember').checked = true;
-            }
-        }
-    </script>
 </body>
+<script src="script.js"></script>
 </html>

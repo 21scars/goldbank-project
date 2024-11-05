@@ -1,0 +1,76 @@
+/* Base styles remain the same */
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    nav {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero-section {
+        padding: 40px 20px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .feature-card {
+        width: 100%;
+    }
+
+    .cta-section {
+        padding: 40px 20px;
+    }
+
+    form {
+        width: 100%;
+        padding: 20px;
+    }
+
+    input, button {
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    footer div {
+        margin: 10px 0;
+    }
+}
+
+/* Additional styles for very small screens */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}

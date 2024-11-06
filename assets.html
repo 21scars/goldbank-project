@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,134 +12,201 @@
             background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
             min-height: 100vh;
         }
+
         .header {
             background: linear-gradient(to right, #ffd700, #ffed4a);
             padding: 20px 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: space-between;
         }
-        .welcome-section {
-            flex: 1;
-        }
-        .welcome-section h1 {
-            margin: 0;
-            color: #2c3e50;
-        }
-        .welcome-section h3 {
-            color: #2c3e50;
-            margin-top: 5px;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-        .button-group {
+
+        .header-buttons {
             display: flex;
             gap: 15px;
         }
-        .main-container {
+
+        .withdraw-btn, .back-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .withdraw-btn:hover, .back-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        .assets-container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 0 20px;
         }
-        .asset-container {
+
+        .balance-info {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-        .asset-item {
-            padding: 25px;
-            border-bottom: 1px solid #eee;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            transition: background-color 0.3s;
-        }
-        .asset-item:hover {
-            background-color: #f8f9fa;
-        }
-        .value {
-            color: #28a745;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .summary {
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        button {
-            background: transparent;
-            border: 2px solid #2c3e50;
+
+        .split-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .left-panel, .right-panel {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .panel-title {
             color: #2c3e50;
-            padding: 12px 25px;
-            border-radius: 25px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .asset-card {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .asset-value {
+            font-size: 1.5rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
+            color: #2c3e50;
         }
-        .withdraw-btn {
-            background: #2c3e50;
-            color: white;
-            border: none;
+
+        .trend {
+            margin-top: 5px;
+            font-size: 0.9rem;
         }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+        .trend-positive {
+            color: #28a745;
         }
-        @media (max-width: 768px) {
+
+        .trend-negative {
+            color: #dc3545;
+        }
+
+        @media screen and (max-width: 768px) {
             .header {
+                padding: 15px 20px;
+            }
+
+            .header-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 15px;
             }
-            .asset-item {
-                grid-template-columns: 1fr;
-                text-align: center;
+
+            .split-container {
+                flex-direction: column;
+            }
+
+            .left-panel, .right-panel {
+                margin-bottom: 20px;
+            }
+
+            .asset-card {
+                padding: 12px;
+            }
+
+            .asset-value {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .asset-card h3 {
+                font-size: 1rem;
+            }
+
+            .trend {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="welcome-section">
+        <div class="header-content">
             <h1>🏦 Gold Bank Assets</h1>
-            <h3>Welcome, Joel! Your portfolio overview</h3>
-        </div>
-        <div class="button-group">
-            <button class="withdraw-btn" onclick="window.location.href='withdrawal.html'">Withdraw</button>
-            <button onclick="logout()">Logout</button>
+            <div class="header-buttons">
+                <button class="withdraw-btn" onclick="window.location.href='withdrawal.html'">Withdraw</button>
+                <button class="back-btn" onclick="logout()">Logout</button>
+            </div>
         </div>
     </div>
-    
-    <div class="main-container">
-        <div class="asset-container">
-            <div class="asset-item">
-                <h3>Physical Gold</h3>
-                <p>Amount: 100 oz</p>
-                <p class="value">$200,000</p>
+
+    <div class="assets-container">
+        <div class="balance-info">
+            <h2>Total Portfolio Value: <span id="totalValue">Loading...</span></h2>
+        </div>
+
+        <div class="split-container">
+            <div class="left-panel">
+                <h2 class="panel-title">Investment Assets</h2>
+                <div class="asset-card">
+                    <h3>Stocks & ETFs</h3>
+                    <div class="asset-value">$245,000</div>
+                    <div class="trend trend-positive">↑ +2.5% today</div>
+                </div>
+                <div class="asset-card">
+                    <h3>Bonds</h3>
+                    <div class="asset-value">$180,000</div>
+                    <div class="trend trend-positive">↑ +0.8% today</div>
+                </div>
+                <div class="asset-card">
+                    <h3>Real Estate</h3>
+                    <div class="asset-value">$150,000</div>
+                    <div class="trend trend-positive">↑ +5.2% this month</div>
+                </div>
             </div>
-            <div class="asset-item">
-                <h3>Gold ETFs</h3>
-                <p>Shares: 500</p>
-                <p class="value">$150,000</p>
-            </div>
-            <div class="asset-item">
-                <h3>Gold Certificates</h3>
-                <p>Certificates: 10</p>
-                <p class="value">$75,000</p>
-            </div>
-            <div class="asset-item">
-                <h3>Gold Futures</h3>
-                <p>Contracts: 5</p>
-                <p class="value">$250,000</p>
-            </div>
-            
-            <div class="summary">
-                <h2>Total Portfolio Value</h2>
-                <h3 id="totalValue">$675,000</h3>
+
+            <div class="right-panel">
+                <h2 class="panel-title">Alternative Assets</h2>
+                <div class="asset-card">
+                    <h3>Cryptocurrencies</h3>
+                    <div class="asset-value">$75,000</div>
+                    <div class="trend trend-negative">↓ -1.2% today</div>
+                </div>
+                <div class="asset-card">
+                    <h3>Precious Metals</h3>
+                    <div class="asset-value">$85,000</div>
+                    <div class="trend trend-positive">↑ +3.1% this week</div>
+                </div>
+                <div class="asset-card">
+                    <h3>Cash Balance</h3>
+                    <div class="asset-value">$25,000</div>
+                    <div class="trend">Available for withdrawal</div>
+                </div>
             </div>
         </div>
     </div>
@@ -148,12 +216,18 @@
             window.location.href = 'login.html';
         }
 
-        if (!sessionStorage.getItem('portfolioValue')) {
-            sessionStorage.setItem('portfolioValue', '675000');
-        }
+        const assets = {
+            stocks: 245000,
+            bonds: 180000,
+            realEstate: 150000,
+            crypto: 75000,
+            preciousMetals: 85000,
+            cash: 25000
+        };
 
-        document.getElementById('totalValue').textContent = 
-            `$${parseFloat(sessionStorage.getItem('portfolioValue')).toLocaleString()}`;
+        const totalValue = Object.values(assets).reduce((a, b) => a + b, 0);
+        document.getElementById('totalValue').textContent = `$${totalValue.toLocaleString()}`;
+        sessionStorage.setItem('portfolioValue', totalValue.toString());
 
         function logout() {
             sessionStorage.removeItem('isLoggedIn');

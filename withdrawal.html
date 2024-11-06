@@ -252,7 +252,7 @@
 
         window.onload = function() {
             if (!sessionStorage.getItem('isLoggedIn')) {
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
                 return;
             }
             const balance = parseFloat(sessionStorage.getItem('portfolioValue') || 675000);

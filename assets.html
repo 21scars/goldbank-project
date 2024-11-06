@@ -213,7 +213,7 @@
 
     <script>
         if (!sessionStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
 
         const assets = {
@@ -232,7 +232,7 @@
         function logout() {
             sessionStorage.removeItem('isLoggedIn');
             sessionStorage.removeItem('portfolioValue');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     </script>
 </body>
